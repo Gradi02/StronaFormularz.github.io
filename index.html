@@ -176,36 +176,47 @@
     
             // Tworzenie dokumentu PDF
             doc.setFontSize(18);
-            doc.text("UMOWA KUPNA - SPRZEDAŻY", 105, 20, null, null, "center");
-    
+            doc.text("UMOWA KUPNA - SPRZEDAŻY", 105, 20, { align: "center" });
+
             doc.setFontSize(12);
             doc.text(`Umowa zawarta w dniu: ${data[11].value}`, 20, 40);
-            doc.text(`Kupujący: ${data[0].value} ${data[1].value}`, 20, 50);
-            doc.text(`Adres: ${data[3].value} ${data[4].value}, ${data[5].value}, ${data[6].value}`, 20, 60);
-            doc.text(`Email: ${data[2].value}`, 20, 80);  
+            doc.text("pomiędzy:", 20, 50);
+            doc.text(`Panem/Panią: ${data[0].value} ${data[1].value}`, 20, 60);
+            doc.text(`Adres: ${data[3].value} ${data[4].value}, ${data[5].value}, ${data[6].value}`, 20, 70);
+            doc.text(`Email: ${data[2].value}`, 20, 80);
 
-            doc.text("Przedmiot transakcji:", 20, 100);   
-            doc.text(`Produkt: ${data[7].value}`, 20, 110);
-            doc.text(`Ilość: ${data[8].value}`, 20, 120);
-            doc.text(`Cena jednostkowa: ${data[9].value} PLN`, 20, 130);
-            doc.text(`Cena słownie: ${data[10].value}`, 20, 140);
-            doc.text(`Łączna kwota: ${(data[8].value * data[9].value).toFixed(2)} PLN`, 20, 150);
-    
-            doc.text("Postanowienia końcowe:", 20, 170);
-    
-            doc.text("Sprzedawca oświadcza, że jest właścicielem rzeczy i nie jest ona obciążona prawami osób trzecich.", 20, 180, { maxWidth: 170 });
-            doc.text("W sprawach nieuregulowanych niniejszą umową mają zastosowanie przepisy kodeksu cywilnego.", 20, 190, { maxWidth: 170 });
-    
-            doc.text("Zmiana umowy wymaga formy pisemnej pod rygorem nieważności.", 20, 200);
-            doc.text("Umowę sporządzono w dwóch jednobrzmiących egzemplarzach.", 20, 210);
-    
-            doc.text("Podpis Sprzedawcy:", 20, 230);
-            doc.text("Podpis Kupującego:", 120, 230);
-            doc.addImage(signatureDataUrl, "PNG", 120, 235, 60, 20);
-    
-            // Pobranie PDF
+            doc.text("Sprzedawcą:", 20, 90);
+            doc.text("Black Light Invest sp. z o.o., Ul. Brukowa 8 91-341 Łódź", 20, 100);
+            doc.text("NIP: 9472015077, REGON: 540140591, KRS:0001137427", 20, 110);
+
+            doc.text("Przedmiot transakcji:", 20, 125);
+
+            doc.autoTable({
+                startY: 130,
+                head: [["Lp.", "Nazwa / gatunek", "Ilość (szt)", "Cena (PLN)", "Uwagi"]],
+                body: [[1, data[7].value, data[8].value, data[9].value, ""]],
+                theme: "grid",
+                styles: { font: "Roboto", fontSize: 10 },
+            });
+
+            doc.text("Łączna kwota:", 20, doc.lastAutoTable.finalY + 10);
+            doc.text(`${(data[8].value * data[9].value).toFixed(2)} PLN`, 80, doc.lastAutoTable.finalY + 10);
+            doc.text(`Słownie: ${data[10].value}`, 20, doc.lastAutoTable.finalY + 20);
+
+            doc.text("Postanowienia końcowe:", 20, doc.lastAutoTable.finalY + 40);
+            doc.text("Sprzedawca oświadcza, że jest właścicielem rzeczy i nie jest ona obciążona prawami osób trzecich.", 20, doc.lastAutoTable.finalY + 50, { maxWidth: 170 });
+            doc.text("W sprawach nieuregulowanych niniejszą umową mają zastosowanie przepisy kodeksu cywilnego.", 20, doc.lastAutoTable.finalY + 60, { maxWidth: 170 });
+            doc.text("Zmiana umowy wymaga formy pisemnej pod rygorem nieważności.", 20, doc.lastAutoTable.finalY + 70);
+            doc.text("Umowę sporządzono w dwóch jednobrzmiących egzemplarzach.", 20, doc.lastAutoTable.finalY + 80);
+
+            doc.text("Podpis Sprzedawcy:", 20, doc.lastAutoTable.finalY + 100);
+            doc.text("Podpis Kupującego:", 120, doc.lastAutoTable.finalY + 100);
+            if (signatureDataUrl) {
+                doc.addImage(signatureDataUrl, "PNG", 120, doc.lastAutoTable.finalY + 105, 60, 20);
+            }
+
             doc.save("umowa_kupna_sprzedazy.pdf");
-        };
+            };
     </script>
 </body>
 </html>
