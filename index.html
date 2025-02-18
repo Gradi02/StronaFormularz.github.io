@@ -180,17 +180,22 @@
             doc.text("UMOWA KUPNA - SPRZEDAŻY", 105, 20, { align: "center" });
 
             doc.setFontSize(12);
-            doc.text(`Umowa zawarta w dniu: ${data[11].value}`, 20, 40);
-            doc.text("pomiędzy:", 20, 50);
-            doc.text(`Panem/Panią: ${data[0].value} ${data[1].value}`, 20, 60);
-            doc.text(`Adres: ${data[3].value} ${data[4].value}, ${data[5].value}, ${data[6].value}`, 20, 70);
-            doc.text(`Email: ${data[2].value}`, 20, 80);
+            doc.text(`Umowa zawarta w dniu: ${data[11].value}, pomiędzy:`, 20, 40);
 
-            doc.text("Sprzedawcą:", 20, 90);
-            doc.text("Black Light Invest sp. z o.o., Ul. Brukowa 8 91-341 Łódź", 20, 100);
-            doc.text("NIP: 9472015077, REGON: 540140591, KRS:0001137427", 20, 110);
+            doc.text(`Panem(ią): ${data[0].value} ${data[1].value}`, 10, 50);
+            doc.text(`Adres: ${data[3].value} ${data[4].value}, ${data[5].value}, ${data[6].value}`, 20, 55);
+            doc.text(`Email: ${data[2].value}`, 20, 60);
+            
+            doc.text("zwanym dalej: 'Sprzedawcą' a", 20, 70);
 
-            doc.text("Przedmiot transakcji:", 20, 125);
+            doc.text("Black Light Invest sp. z o.o., Ul. Brukowa 8 91-341 Łódź", 20, 80);
+            doc.text("NIP: 9472015077, REGON: 540140591, KRS:0001137427", 20, 85);
+
+            doc.text("zwanym dalej: 'Kupującym'", 20, 95);
+            doc.text("o następującej treści:", 20, 100);
+
+            doc.text("§1", 20, 115, { align: "center" });
+            doc.text("Sprzedawca sprzedaje, a Kupujący kupuje następujące przedmioty/ rzeczy:", 20, 120);
 
             doc.autoTable({
                 startY: 130,
