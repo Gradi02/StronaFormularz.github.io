@@ -208,11 +208,12 @@
 
             doc.autoTable({
                 startY: 130,
-                tableWidth: 170,
                 head: [["Lp.", "Nazwa / gatunek", "Ilość (szt)", "Cena (PLN)", "Uwagi"]],
                 body: [[1, data[7].value, data[8].value, data[9].value, ""]],
                 theme: "grid",
                 styles: { font: "Roboto", fontSize: 10 },
+                tableWidth: 170, // Wymuszona szerokość tabeli
+                margin: { left: 20 }, // Odsunięcie od lewej, by pasowało do tekstu
                 columnStyles: {
                     0: { cellWidth: 15 },  // Lp.
                     1: { cellWidth: 65 },  // Nazwa / gatunek
@@ -281,9 +282,9 @@
             doc.text("Umowę sporządzono w dwóch jednobrzmiących egzemplarzach, po jednym dla każdej ze stron.", 20, 115, { maxWidth: 170 });
 
             doc.text("Podpis Sprzedawcy:", 20, 230);
-            doc.text("Podpis Kupującego:", 120, 230);
+            doc.text("Podpis Kupującego:", 140, 230);
             if (signatureDataUrl) {
-                doc.addImage(signatureDataUrl, "PNG", 120, 235, 60, 20);
+                doc.addImage(signatureDataUrl, "PNG", 140, 235, 60, 60);
             }
 
             doc.save("umowa_kupna_sprzedazy.pdf");
