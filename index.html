@@ -8,7 +8,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.29/jspdf.plugin.autotable.min.js"></script>
-    <script type="module" src="base64.js"></script>
+    <script type="module" src="./base64.js"></script>
 
     <style>
         body {
@@ -85,8 +85,7 @@
     </div>
 
     <script>
-        import { base64Image } from "base64.js";
-        import { robotoBase64 } from "base64.js";
+        import { base64Image, robotoBase64 } from "./base64.js";
 
         const canvas = document.getElementById("drawingArea");
         const ctx = canvas.getContext("2d");
